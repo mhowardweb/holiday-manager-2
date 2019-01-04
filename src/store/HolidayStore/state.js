@@ -1,0 +1,27 @@
+export default {
+  settings: {
+    company: null,
+    name: null,
+    daysHol: 0,
+    bankHols: 0,
+    yearStart: '2018-03-01T00:00:00',
+    yearEnd: '2019-03-01T00:00:00',
+    mon: true,
+    tue: true,
+    wed: true,
+    thu: true,
+    fri: true,
+    sat: false,
+    sun: false,
+  },
+  holiday: {
+    id: '',
+    holName: '',
+    holStart: '',
+    holEnd: '',
+    daysBooked: 0,
+    details: '',
+  },
+  holidays: [],
+  workDays: [],
+};
