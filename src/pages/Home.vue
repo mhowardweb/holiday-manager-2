@@ -1,30 +1,71 @@
 <template>
   <q-page padding>
-    <div class="row">
-      <div class="col name">{{summary.name}}'s</div>
-    </div>
-    <div class="row">
-      <div class="col title">Holiday Manager</div>
-    </div>
-    <div class="row">
-      <div class="col">Total Days</div>
-      <div class="col">{{summary.totalDaysHol}}</div>
-    </div>
-    <div class="row">
-      <div class="col">Days Used</div>
-      <div class="col">{{summary.totalDaysUsed}}</div>
-    </div>
-    <div class="row">
-      <div class="col">Days Remaining</div>
-      <div class="col">{{summary.totalDaysRemaining}}</div>
-    </div>
-    <div class="row">
-      <div class="col">Use By</div>
-      <div class="col">{{summary.yearEnd | formatDate}}</div>
-    </div>
+    <q-card>
+      <q-card-title class="col name">
+        {{summary.name}}'s
+        <div class="col title">Holiday Manager</div>
+      </q-card-title>
+      <q-card-separator />
+      <q-card-main>
+        <q-list>
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="primary" icon="date_range" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>Total Days</q-item-tile>
+            </q-item-main>
+            <q-item-side right>{{summary.totalDaysHol}}</q-item-side>
+          </q-item>
+
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="warning" icon="flight_land" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>Days Used</q-item-tile>
+            </q-item-main>
+            <q-item-side right>{{summary.totalDaysUsed}}</q-item-side>
+          </q-item>
+
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="danger" icon="flight_takeoff" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>Days Remaining</q-item-tile>
+            </q-item-main>
+            <q-item-side right>{{summary.totalDaysRemaining}}</q-item-side>
+          </q-item>
+
+          <q-item>
+            <q-item-side>
+              <q-item-tile color="tertiary" icon="event_busy" />
+            </q-item-side>
+            <q-item-main>
+              <q-item-tile label>Use By</q-item-tile>
+            </q-item-main>
+            <q-item-side right>{{summary.yearEnd | formatDate}}</q-item-side>
+          </q-item>
+
+          <q-item>
+            <q-item-main>
+              <q-btn
+                class="full-width"
+                outline
+                color="secondary"
+                label="HOLIDAY SUMMARY"
+                to="holidays">
+              </q-btn>
+            </q-item-main>
+          </q-item>
+        </q-list>
+      </q-card-main>
+    </q-card>
+
     <div class="row">
       <div class="col">
-        <q-btn color="primary" label="HOLIDAY SUMMARY" to="holidays"></q-btn>
+
       </div>
     </div>
   </q-page>

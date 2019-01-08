@@ -35,27 +35,62 @@
           <q-item-side right color="green">{{summary.yearEnd | formatDate}} </q-item-side>
         </q-item>
     </q-list>
+    <q-list>
+    <q-item v-for="holiday in holidays" :key="holiday.id">
+      <q-item-main>
+        <q-item-tile>
+          {{holiday.holName}}
+        </q-item-tile>
+        <q-item-tile>
+          Days: {{holiday.daysBooked}}
+        </q-item-tile>
+        <q-item-tile>
+          Start: {{holiday.holStart | formatDate}}
+          End: {{holiday.holEnd | formatDate}}
+        </q-item-tile>
+      </q-item-main>
+      <q-item-side right>
+      <q-btn round color="secondary" icon="edit" @click="handleSelect(holiday)" />
+      <q-btn round color="secondary" icon="delete" @click="handleDelete(holiday)" />
+      </q-item-side>
 
-    <div v-for="holiday in holidays" :key="holiday.id">
-      {{holiday.holName}}
-      {{holiday.daysBooked}}
-      {{holiday.holStart | formatDate}}
-      {{holiday.holEnd | formatDate}}
-    </div>
+    </q-item>
+
+    </q-list>
   </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Holidays',
+  methods: {
+    ...mapActions({
+      deleteHoliday: 'HolidayStore/deleteHoliday',
+      handleSelect: 'HolidayStore/selectHoliday',
+    }),
+    handleDelete(data) {
+      this.$q.dialog({
+        title: 'Confirm Delete',
+        message: 'Are you sure you would like to delete this Holiday ?',
+        ok: true,
+        cancel: true,
+        preventClose: true,
+      }).then(() => {
+        this.deleteHoliday(data);
+      }).catch(() => {
+
+      });
+    },
+  },
   computed: {
     ...mapGetters({
       summary: 'HolidayStore/calcSummary',
       holidays: 'HolidayStore/getHolidays',
     }),
   },
+
 };
 </script>
 

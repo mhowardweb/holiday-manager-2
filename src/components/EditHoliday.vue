@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <h3 text-center class="banner">Add Holiday</h3>
+    <h3 text-center class="banner">Edit Holiday</h3>
     <q-field
           icon="business"
           :error="$v.holiday.holName.$error"
@@ -17,13 +17,12 @@
         <q-field
           icon="calendar_today"
           :error="$v.holiday.holStart.$error"
-          error-label="Error"
+          error-label="Must be between 10 and 40"
         >
           <q-datetime
-            float-label="Holiday Start"
+            float-label="Holiday Year Start"
             type="date"
-            v-model="holiday.holStart"
-            format="DD-MM-YYYY"
+            v-model.trim="holiday.holStart"
             @blur="$v.holiday.holStart.$touch"
           />
         </q-field>
@@ -31,13 +30,12 @@
         <q-field
           icon="calendar_today"
           :error="$v.holiday.holEnd.$error"
-          error-label="Error"
+          error-label="Must be between 10 and 40"
         >
           <q-datetime
-            float-label="Holiday End"
+            float-label="Holiday Year End"
             type="date"
-            v-model="holiday.holEnd"
-            format="DD-MM-YYYY"
+            v-model.trim="holiday.holEnd"
             @blur="$v.holiday.holEnd.$touch"
           />
         </q-field>
@@ -61,12 +59,11 @@
         <q-field>
           <q-btn
             color="primary"
-            icon="save"
-            label="Save Holiday"
-            @click="handleAdd(holiday)"
-            :disable="$v.$invalid"
-          />
+            icon="check"
+            label="Update Holiday"
+            @click="handleUpdate(holiday)" />
         </q-field>
+
   </q-page>
 </template>
 
@@ -76,7 +73,7 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 import calcDaysHol from '../helpers/calcDaysHol.js';
 
 export default {
-  name: 'AddHoliday',
+  name: 'EditHoliday',
   validations: {
     holiday: {
       holName: { required, minLength: minLength(4) },
@@ -95,28 +92,22 @@ export default {
       holEnd: { required },
     },
   },
+  methods: {
+    cancel() {
+      this.$router.replace('holidays');
+    },
+    ...mapActions({
+      handleUpdate: 'HolidayStore/updateHoliday',
+      clear: 'HolidayStore/clearForm',
+    }),
+  },
   computed: {
     ...mapState({
       holiday: state => state.HolidayStore.holiday,
     }),
     ...mapGetters({
       summary: 'HolidayStore/calcSummary',
-      workDays: 'HolidayStore/getWorkDays',
-      settings: 'HolidayStore/getSettings',
     }),
-
-  },
-  methods: {
-    ...mapActions({
-      handleAdd: 'HolidayStore/addHoliday',
-      clear: 'HolidayStore/clearForm',
-    }),
-  },
-  mounted() {
-    this.clear();
   },
 };
 </script>
-
-<style>
-</style>

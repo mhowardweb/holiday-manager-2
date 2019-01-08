@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <h3 text-center class="banner">Settings</h3>
+    <h3 class="text-center">Settings</h3>
     <q-field
           icon="business"
           :error="$v.settings.company.$error"
@@ -62,7 +62,8 @@
           <q-datetime
             float-label="Holiday Year Start"
             type="date"
-            v-model.trim="settings.yearStart"
+            v-model="settings.yearStart"
+            format="DD-MM-YYYY"
             @blur="$v.settings.yearStart.$touch"
           />
         </q-field>
@@ -75,7 +76,8 @@
           <q-datetime
             float-label="Holiday Year End"
             type="date"
-            v-model.trim="settings.yearEnd"
+            v-model="settings.yearEnd"
+            format="DD-MM-YYYY"
             @blur="$v.settings.yearEnd.$touch"
           />
         </q-field>
@@ -148,15 +150,14 @@
       </q-list>
 
         <q-btn
-          full-width
-          align="right"
+          class="full-width q-mt-md"
           color="primary"
           :disable="$v.settings.name.$error || $v.settings.company.$error || $v.$invalid"
           @click="handleSave(settings)"
         >
           Save Settings
         </q-btn>
-        <q-btn to="accounts">Cancel</q-btn>
+        <q-btn class="full-width q-mt-md" to="home">Cancel</q-btn>
   </q-page>
 </template>
 
@@ -188,13 +189,5 @@ export default {
 </script>
 
 <style scoped>
-.banner {
-  background: rgba(31, 32, 65, 0.5);
-  font-family: Quicksand;
-  font-style: normal;
-  font-weight: bold;
-  line-height: normal;
-  font-size: 24px;
-  color: #ffffff;
-}
+
 </style>

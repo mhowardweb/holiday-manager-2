@@ -8,6 +8,8 @@ const routes = [
       { path: 'holidays', component: () => import('pages/Holidays.vue') },
       { path: 'add', component: () => import('pages/AddHoliday.vue') },
       { path: 'settings', component: () => import('pages/Settings.vue') },
+      { path: 'edit', component: () => import('components/EditHoliday.vue') },
+
     ],
   },
 ];

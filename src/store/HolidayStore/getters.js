@@ -22,3 +22,13 @@ export function getHolidays(state) {
   const data = state.holidays;
   return data.sort((a, b) => a[data.holStart] > b[data.holStart]);
 }
+
+export function getWorkDays(state) {
+  const data = state.workDays;
+  return data;
+}
+
+export function getSettings(state) {
+  const data = state.settings;
+  return data;
+}
